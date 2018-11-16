@@ -182,7 +182,8 @@ library(tidyverse)
 tibble(sampleId = colnames(gene.expression.data)) %>%
   filter(!grepl("Ensembl", sampleId) & !grepl("^Chicken", sampleId)) %>%
   separate(sampleId, c("species", "tissue", "type", "rep"), sep = "[.]", remove = F) %>%
-  filter(!(species == "Human" & tissue == "Liver")) -> st
+  filter(!(species == "Human" & tissue == "Liver")) %>%
+  mutate(type = ifelse(type == "RP", "Translation level", "Transcription level")) -> st
 
 geneExpr <- t(gene.expression.data[, st$sampleId])
 

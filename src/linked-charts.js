@@ -3443,7 +3443,7 @@ function pointLine(id, chart){
 		layer.elementIds().map(function(id) {
 			return d3.extent(d3.range(layer.nsteps()).map(function(e){
 				return layer.get_x(e, id);
-			}))
+			}).filter(function(e) {return !lc.isNaN(e)}))
 		}).forEach(function(e) {domain = domain.concat(e);});
 
 		return d3.extent(domain);
@@ -3454,7 +3454,7 @@ function pointLine(id, chart){
 		layer.elementIds().map(function(id) {
 			return d3.extent(d3.range(layer.nsteps()).map(function(e){
 				return layer.get_y(e, id);
-			}))
+			}).filter(function(e) {return !lc.isNaN(e)}))
 		}).forEach(function(e) {domain = domain.concat(e);});
 
 		return d3.extent(domain);
